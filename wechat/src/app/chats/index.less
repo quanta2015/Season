@@ -1,0 +1,123 @@
+.g-content {
+  padding: 0;
+  background: #ccc;
+}
+
+.g-chats {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 1000px;
+  margin: 0 auto;
+  background: #fff;
+  
+  .m-chats {
+    display: flex;
+    width: 100%;
+    height: calc( 100% - 72px);
+
+    .m-list {
+      display: flex;
+      flex-direction: column;
+      color: #fff;
+      width: 100px;
+      background: #333;
+
+      span + span {
+        margin-top: 2px;
+      }
+
+      span {
+        padding: 5px;
+        background: #229966;
+        color: #fff;
+        cursor: pointer;
+        transition: .5s;
+
+        &:hover {
+          background: #22bb66;
+        }
+      }
+    }
+
+
+    .m-main {
+      width: 100%;
+      padding: 5px;
+      font-size: 12px;
+      background: #eee;
+      overflow-y: scroll;
+
+      .m-msg-wrap + .m-msg-wrap {
+        margin-top: 10px;
+      }
+
+      .cli {
+        flex-direction: row-reverse;
+        label {
+          background: #21A557!important;
+        }
+      }
+
+      .m-msg-wrap {
+        display: flex;
+
+        label {
+          background: #dd6600;
+          color: #fff;
+          height: 30px;
+          padding: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 3px;
+        }
+
+        span {
+          border-radius: 3px;
+          background: #fff;
+          padding: 5px 10px;
+          line-height: 1.5;
+          text-align: justify;
+        }
+
+        .m-from {
+          margin-left: 10px;
+        }
+        .m-to {
+          margin-right: 10px;
+        }
+      }
+    }
+
+  }
+
+  .m-footer {
+    display: flex;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 1000px;
+    z-index: 100;
+    background: #fff;
+
+    input {
+      border: 1px solid #eee;
+      height: 32px;
+      width: 100%;
+      padding: 5px 10px;
+    }
+
+    span {
+      display: block;
+      width: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ff6600;
+      color: #fff;
+    }
+  }
+  
+}

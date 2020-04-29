@@ -1,0 +1,118 @@
+.g-chat {
+  display: flex;
+  height: calc(100vh - 56px);
+  
+  align-items: center;
+  flex-direction: column;
+
+  
+
+  .m-chat {
+    
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+    .m-main {
+      padding: 5px;
+      font-size: 12px;
+      background: #eee;
+      overflow: scroll;
+      height: calc( 100vh - 130px );
+
+      .m-msg-wrap + .m-msg-wrap {
+        margin-top: 10px;
+      }
+
+      .sys {
+        flex-direction: row-reverse;
+        label {
+          background: #dd6600!important;
+        }
+      }
+
+      .m-msg-wrap {
+        display: flex;
+
+        label {
+          background: #21A557;
+          color: #fff;
+          height: 30px;
+          padding: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 3px;
+        }
+
+        span {
+          border-radius: 3px;
+          background: #fff;
+          padding: 5px 10px;
+          line-height: 1.5;
+          text-align: justify;
+          position: relative;
+        }
+
+        span:before {
+          content: '';
+          display: block;
+          position: absolute;
+          width: 0;
+          height: 0;
+          border: 10px solid transparent;
+        }
+
+        .m-from:before {
+          border-right: 8px solid #fff;
+          left: -15px;
+        }
+        .m-to:before {
+          border-left: 8px solid #fff;
+          right: -15px;
+        }
+
+        .m-from {
+          margin-left: 10px;
+        }
+        .m-to {
+          margin-right: 10px;
+        }
+
+
+
+
+      }
+
+
+    }
+
+    .m-footer {
+      display: flex;
+      padding: 10px;
+      position: fixed;
+      bottom: 56px;
+      width: 100%;
+      z-index: 5;
+      background: #fff;
+
+      input {
+        border: 1px solid #eee;
+        height: 32px;
+        width: 100%;
+        padding: 5px 10px;
+      }
+
+      span {
+        display: block;
+        width: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #ff6600;
+        color: #fff;
+      }
+    }
+  }
+}
