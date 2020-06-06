@@ -22,15 +22,12 @@ class Dashboard extends React.Component {
   // ios 设备执行如下函数才能激活 active 伪类
   componentDidMount() {
     document.body.addEventListener('touchstart', function () { });
-    console.log(MENU_MAIN[0].submenu[0].path)
-
-    // this.props.history.push(MENU_MAIN[2].submenu[1].path)
+    // console.log(MENU_MAIN[0].submenu[0].path)
   }
 
   // 显示二级菜单
   showMenu = (index, ele) => {
     ele.stopPropagation()
-
     let menu = ['', '', '']
     menu[index] = 'fn-show menu-slide-in'
     this.setState({menu})
@@ -41,13 +38,18 @@ class Dashboard extends React.Component {
     let newMenu = menu.map((item) => {
       return item.length > 0 ? 'fn-show menu-slide-out' : ''
     })
-    this.setState({
-      menu: newMenu
-    })
+    this.setState({menu: newMenu})
   }
 
   doLink = (link) =>{
-    this.props.history.push(link)
+    // this.props.history.push(link)
+
+    let HIST = 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI0MjkzNDEyOA==&scene=124#wechat_redirect'
+    if (link==='/hist'){
+      window.location.replace(HIST)
+    }else{
+      window.location.replace(`/#${link}`)
+    }
   }
 
   render() {

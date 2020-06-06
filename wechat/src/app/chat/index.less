@@ -19,9 +19,12 @@
       font-size: 12px;
       background: #eee;
       overflow: scroll;
-      height: calc( 100vh - 130px );
+      height: calc(100vh - 115px);
+      position: fixed;
+      width: 100%;
+      font-size: 16px;
 
-      .m-msg-wrap + .m-msg-wrap {
+      .m-msg + .m-msg {
         margin-top: 10px;
       }
 
@@ -35,7 +38,14 @@
       .m-msg-wrap {
         display: flex;
 
-        label {
+        img {
+          height: 40px;
+          width: 40px;
+          background: #fff;
+          padding: 2px;
+        }
+
+        /*label {
           background: #21A557;
           color: #fff;
           height: 30px;
@@ -44,9 +54,11 @@
           justify-content: center;
           align-items: center;
           border-radius: 3px;
-        }
+        }*/
 
         span {
+          display: flex;
+          align-items: center;
           border-radius: 3px;
           background: #fff;
           padding: 5px 10px;
@@ -65,7 +77,7 @@
         }
 
         .m-from:before {
-          border-right: 8px solid #fff;
+          border-right: 8px solid #95EC69;
           left: -15px;
         }
         .m-to:before {
@@ -75,17 +87,14 @@
 
         .m-from {
           margin-left: 10px;
+          background: #95EC69;
+          color: #000;
         }
         .m-to {
           margin-right: 10px;
         }
 
-
-
-
       }
-
-
     }
 
     .m-footer {
@@ -99,7 +108,7 @@
 
       input {
         border: 1px solid #eee;
-        height: 32px;
+        height: 40px;
         width: 100%;
         padding: 5px 10px;
       }

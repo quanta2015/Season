@@ -24,19 +24,33 @@
       width: 100px;
       background: #333;
 
-      span + span {
-        margin-top: 2px;
-      }
-
-      span {
-        padding: 5px;
-        background: #229966;
-        color: #fff;
+      .m-uc {
+        display: flex;
+        /*justify-content: center;*/
+        align-items: center;
+        overflow: hidden;
         cursor: pointer;
-        transition: .5s;
 
-        &:hover {
-          background: #22bb66;
+        img {
+          width: 40px;
+          height: 40px;
+        }
+
+        span {
+          display: flex;
+          align-items: center;
+          height: 100%;
+          padding: 5px;
+          background: #229966;
+          color: #fff;
+
+          &:hover {
+            background: #22bb66;
+          }
+        }
+
+        span + span {
+          margin-top: 2px;
         }
       }
     }
@@ -48,8 +62,9 @@
       font-size: 12px;
       background: #eee;
       overflow-y: scroll;
+      font-size: 16px;
 
-      .m-msg-wrap + .m-msg-wrap {
+      .m-msg + .m-msg {
         margin-top: 10px;
       }
 
@@ -63,27 +78,47 @@
       .m-msg-wrap {
         display: flex;
 
-        label {
-          background: #dd6600;
-          color: #fff;
-          height: 30px;
-          padding: 5px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          border-radius: 3px;
+
+        img {
+          width: 40px;
+          height: 40px;
+          background: #fff;
+          padding: 2px;
         }
 
         span {
+          display: flex;
+          align-items: center;
           border-radius: 3px;
           background: #fff;
           padding: 5px 10px;
           line-height: 1.5;
           text-align: justify;
+          position: relative;
+        }
+
+        span:before {
+          content: '';
+          display: block;
+          position: absolute;
+          width: 0;
+          height: 0;
+          border: 10px solid transparent;
+        }
+
+        .m-from:before {
+          border-right: 8px solid #95EC69;
+          left: -15px;
+        }
+        .m-to:before {
+          border-left: 8px solid #fff;
+          right: -15px;
         }
 
         .m-from {
           margin-left: 10px;
+          background: #95EC69;
+          color: #000;
         }
         .m-to {
           margin-right: 10px;
@@ -117,6 +152,7 @@
       align-items: center;
       background: #ff6600;
       color: #fff;
+      cursor: pointer;
     }
   }
   

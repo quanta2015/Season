@@ -28,9 +28,13 @@ class Proj extends React.Component {
     map.addControl(scaleCtrl);
     var zoomCtrl = new BMapGL.ZoomControl()
     map.addControl(zoomCtrl)
+    
 
     var point = new BMapGL.Point(120.220134,30.267188)
     map.centerAndZoom(point, 15)
+
+    map.setHeading(64.5)
+    map.setTilt(73)
 
     data.map(item=>{
       let poi = new BMapGL.Point(item.lat,item.lng)

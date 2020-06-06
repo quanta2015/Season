@@ -109,10 +109,6 @@ class Acty extends React.Component {
                   <label>收费标准</label>
                   <span>{act.charge}</span>
                 </div>
-                <div className="m-row">
-                  <label>二维码</label>
-                  <div className="m-qr"><img src={`${API_SERVER}/${act.qrcode}`}/></div>
-                </div>
                 </>)
               :
               (<><div className="m-row">
@@ -127,12 +123,14 @@ class Acty extends React.Component {
                   <label>奖项设置</label>
                   <span>{act.award}</span>
                 </div>
-                <div className="m-row">
-                  <label>二维码</label>
-                  <div className="m-qr"><img src={`${API_SERVER}/${act.qrcode}`}/></div>
-                </div>
               </>)
             }
+
+            
+            <div className="m-row">
+              <label>二维码</label>
+              <div className="m-qr"><img src={`${API_SERVER}/${act.qrcode}`}/></div>
+            </div>
           </div>
         </div>}
 

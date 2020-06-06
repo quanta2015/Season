@@ -78,10 +78,20 @@ function onListening() {
 }
 
 
+
+
+
 // var options = {
 //   key: fs.readFileSync('./key/site.key'),
 //   cert:fs.readFileSync('./key/site.pem')
 // }
+var exist = (s,u) =>{
+  let e = 0
+  Object.values(s).map(item=>{
+    if (item.user.user === u) e = 1
+  })
+  return e
+}
 var server  = http.createServer(app).listen(port)
 // var servers = https.createServer(options,app).listen(443)
 // servers.on('error', onError)
@@ -92,9 +102,7 @@ var sockets = {}
 var userCounts = 0
 
 var io = require('socket.io')(server);
-
 io.on('connection', (socket) => {
-
 
   socket.on('user:login-sys', function(data) {
     ss = socket
@@ -104,18 +112,37 @@ io.on('connection', (socket) => {
   })
 
   socket.on('user:login', function(data) {
-    var userId = ++userCounts;
-    socket.user = {
-      userId: userId,
-      username: data.user,
-    };
-    console.log('response user:login ', socket.user)
-    socket.emit('response', { type: 'user:login', data: socket.user })
-    Object.keys(sockets).map(function(userId) {
-      sockets[userId].emit('user-added', socket.user)
-    })
-    sockets[userId] = socket
-    console.log('user list:' + sockets)
+    if ((ss===undefined)||(ss===null)) return
+
+    // 如果不存在，则添加到用户列表
+    if (!exist(sockets, data.user)) {
+      let uid = ++ userCounts
+      socket.user = {
+        uid: uid,
+        user: data.user,
+        head: data.head,
+      }
+      sockets[uid] = socket
+      socket.emit('response', { type: 'user:login', data: socket.user })
+      ss.emit('response', { type: 'add', data: socket.user})
+
+      console.log('\n res --- user:login ', socket.user)
+      console.log('\n userlist --- ' + sockets)
+    }else{
+      let uid
+      Object.values(sockets).map(item=>{
+        if (item.user.user === data.user) {
+          uid = item.user.uid
+        }
+      })
+      let user = {
+        uid: uid,
+        user: data.user,
+        head: data.head,
+      }
+      sockets[uid] = socket
+      socket.emit('response', { type: 'user:login', data: user })
+    }
   })
 
   socket.on('user:list', function(data) {
@@ -125,12 +152,14 @@ io.on('connection', (socket) => {
     })
     userlist.forEach(item=>{ item.msg = [] })
     ss.emit('response', { type:'user:list', data:userlist})
+
+    console.log(JSON.stringify(userlist))
   })
 
 
   socket.on('message:send', function (message) {
     message.time = new Date().getTime();
-    console.log('response_message:send: ', message)
+    console.log('\n msg: ', JSON.stringify(message))
 
     let msg = { type: 'message:send', data: message }
     if (message.msg.from === 'system') {
@@ -138,23 +167,31 @@ io.on('connection', (socket) => {
       sockets[message.msg.to] && sockets[message.msg.to].emit('response', msg)
     }
     if (message.msg.to === 'system') {
-      socket.emit('response', msg)
-      ss.emit('response', msg)
+      if ((ss===undefined)||(ss===null)) {
+        let msg = {type: 'err', data: '客服尚未在线！'}
+        socket.emit('response', msg)
+      }else{
+        socket.emit('response', msg)
+        ss.emit('response', msg)
+      }
+      
     }
   })
 
 
   socket.on('user:logout', function() {
-    var user = socket.user;
-    socket.emit('response', { type: 'user:logout'});
+    let user = socket.user;
+    // socket.emit('response', { type: 'user:logout'});
 
     if (!user) return;
     delete sockets[user.userId];
-    socket.disconnect(true);
+    // socket.disconnect(true);
 
-    Object.keys(sockets).map(function(userId) {
-      sockets[userId].emit('user:logged:out', user)
-    })
+    ss.emit('response', { type: 'del', data: user})
+
+    // Object.keys(sockets).map(function(userId) {
+    //   sockets[userId].emit('user:logged:out', user)
+    // })
     console.log('user list:' + sockets)
   })
 
@@ -162,12 +199,13 @@ io.on('connection', (socket) => {
     var user = socket.user;
     if (!user) return;
 
-    delete sockets[user.userId];
+    delete sockets[user.uid];
     socket.disconnect(true);
 
-    Object.keys(sockets).map(function(userId) {
-      sockets[userId].emit('user:removed', user);
-    });
+    ss.emit('response', { type: 'del', data: user})
+    // Object.keys(sockets).map(function(userId) {
+    //   sockets[userId].emit('user:removed', user);
+    // });
   })
 
 });

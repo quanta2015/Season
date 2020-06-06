@@ -34,6 +34,8 @@ class App extends React.Component {
 
                     <Route exact path='/chats'  component={lazy(() => import('app/chats'))}/>
 
+                    <Route exact path='/sys'  component={lazy(() => import('app/sys'))}/>
+
                   </Switch>
                 </Suspense>
               </Dashboard>

@@ -22,9 +22,7 @@ class Ques extends React.Component {
 
   render() {
     let {quess} = this.state
-
-    console.log(quess)
-
+    
     return (
       <div className="g-ques">
         <div className="m-title"> 常见问题</div>
