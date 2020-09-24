@@ -13,15 +13,15 @@ class Chat extends React.Component {
   constructor(props) {
     super(props)
 
-    // let params = new URLSearchParams(this.props.location.search)
-    // let code = params.get("code")
-    // let head = params.get("head").replace(/\'/g, "")
-    // let nick = params.get("nick")
+    let params = new URLSearchParams(this.props.location.search)
+    let code = params.get("code")
+    let head = params.get("head").replace(/\'/g, "")
+    let nick = params.get("nick")
 
-    let code = 'ocD9LwSM2vTrXkvQ9JcB8HMrR7aM'
-    let nick = '慢清尘'
-    let head = 
-   'http://thirdwx.qlogo.cn/mmopen/7vl0y4QMR4D4QhbTjn21xI3icTougoEKJgVv9tnqShbBiamOqlib40hCEGeCLIyXjkxWEc8AsWFTnIuf7vSWJY37b50G22QZXbC/132'
+   //  let code = 'ocD9LwSM2vTrXkvQ9JcB8HMrR7aM'
+   //  let nick = '慢清尘'
+   //  let head = 
+   // 'http://thirdwx.qlogo.cn/mmopen/7vl0y4QMR4D4QhbTjn21xI3icTougoEKJgVv9tnqShbBiamOqlib40hCEGeCLIyXjkxWEc8AsWFTnIuf7vSWJY37b50G22QZXbC/132'
 
     this.state = {
       uid: null,
